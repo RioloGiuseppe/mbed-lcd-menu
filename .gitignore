@@ -1,0 +1,16 @@
+# Mbed
+BUILD/
+*.pyc
+*.scvd
+DebugConfig/
+/Debug/
+
+
+**/.hg/**/*
+**/.git/**/*
+
+# Mbed libs
+BUILD/
+SWSPI/
+mbed-coremark-lm32-printf/
+mbed-os/
