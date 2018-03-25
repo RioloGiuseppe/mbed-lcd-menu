@@ -22,12 +22,15 @@ LCDMenu menu(6,
                                 display.DrawChar(127);
                             display.SetXY(0, _yPos);
                             display.DrawStringNegative((char *)text); 
-                          }else 
+                          }else {
+                              for(uint8_t i =0;i<14;i++)
+                                display.DrawChar(' ');
+                                display.SetXY(0, _yPos);
                               display.DrawString((char *)text);                           
+                          }
                           _yPos+=1; },
              [] {
                  _yPos = 0;
-                 display.ClearLcdMem();
                  display.SetXY(0, 0);
              });
 
@@ -80,7 +83,6 @@ void initWires()
 
 int main()
 {
-    initWires();
     init_lcd();
     lcd_lgt = 0;
     display.DrawString("HELLO!");
@@ -89,9 +91,9 @@ int main()
     display.DrawString("INIT MENU!");
     for (uint8_t i = 0; i < 3; i++)
     {
-        lcd_lgt = 1;
-        wait(1);
         lcd_lgt = 0;
+        wait(1);
+        lcd_lgt = 1;
         wait(0.25);
     }
     display.ClearLcdMem();
@@ -107,5 +109,7 @@ int main()
     menu.add((uint8_t *)"ODD ON", (uint8_t *)NULL);
     menu.add((uint8_t *)"ODD OFF", (uint8_t *)NULL);
     menu.render();
+    initWires();
+    lcd_lgt = 0;
     sleep();
 }
